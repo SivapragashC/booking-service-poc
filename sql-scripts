@@ -1,0 +1,15 @@
+-> order_table_dev
+    CREATE TABLE order_table_dev(customerType VARCHAR,
+                                customerId SERIAL PRIMARY KEY,
+                                createdDate VARCHAR,
+                                lastUpdatedTime VARCHAR,
+                                containerType VARCHAR,
+                                source VARCHAR,
+                                destination VARCHAR)
+
+-> product_dev
+    CREATE TABLE product_dev(prod_id UUID DEFAULT gen_random_uuid () PRIMARY KEY,
+                             prod_name VARCHAR,
+                             prod_price VARCHAR,
+                             cust_id INT,
+                             CONSTRAINT fk_custId FOREIGN KEY(cust_id) REFERENCES order_table_dev(customerId))

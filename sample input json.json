@@ -1,0 +1,21 @@
+{
+  "order":{
+    "customerType": "internal",
+    "createdDate": "2019-04-28T14:45:15",
+    "lastUpdatedTime": "2019-04-28T14:45:15",
+    "containerType": "42f",
+    "source": "nepal",
+    "destination": "bangladesh"
+  },
+  "productList": [
+    {
+      "prod_name": "pencil",
+      "prod_price": 1000
+    },
+    {
+      "prod_name": "pen",
+      "prod_price": 500
+    }
+  ]
+}
+
