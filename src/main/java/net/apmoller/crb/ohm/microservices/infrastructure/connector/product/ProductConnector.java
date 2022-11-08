@@ -4,8 +4,10 @@ package net.apmoller.crb.ohm.microservices.infrastructure.connector.product;
 import lombok.extern.slf4j.Slf4j;
 import net.apmoller.crb.ohm.microservices.application.model.Order;
 import net.apmoller.crb.ohm.microservices.application.model.OrderDto;
+import net.apmoller.crb.ohm.microservices.application.model.OrderRequest;
 import net.apmoller.crb.ohm.microservices.infrastructure.connector.BaseOrderConnector;
 import net.apmoller.crb.ohm.microservices.infrastructure.contract.db.Product;
+import net.apmoller.crb.ohm.microservices.infrastructure.mapper.db.OrderToProductMapper;
 import net.apmoller.crb.ohm.microservices.infrastructure.repository.OrderRepository;
 import net.apmoller.crb.ohm.microservices.infrastructure.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class ProductConnector extends BaseOrderConnector {
 
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    OrderToProductMapper orderToProductMapper;
 
     public Mono<Product> saveProduct(Product product){
         return productRepository.save(product);
@@ -71,13 +76,16 @@ public class ProductConnector extends BaseOrderConnector {
         productList.stream().forEach(s->s.setCust_id(savedItem.getCustomerId()));
     }
 
-    public Mono<OrderDto> createCustomerDetails(OrderDto orderDto)
+    public Mono<OrderDto> createCustomerDetails(OrderRequest orderRequest)
     {
-        return orderRepository.save(orderDto.getOrder())
-                .flatMap(savedItem ->
-                {
-                    setCustomerId(savedItem,orderDto.getProductList());
-                    return productRepository.saveAll(orderDto.getProductList()).then(Mono.just(orderDto));
-                });
+        OrderDto orderDto = OrderDto.builder()
+                .order(orderToProductMapper.bookingOrderToOrder(orderRequest.getBookingOrder()))
+                .productList(orderToProductMapper.bookingProductToProduct(orderRequest.getBookingProductList()))
+                .build();
+        return orderRepository.save(orderDto.getOrder()).flatMap(savedItem ->
+        {
+            setCustomerId(savedItem,orderDto.getProductList());
+            return productRepository.saveAll(orderDto.getProductList()).then(Mono.just(orderDto));
+        });
     }
 }

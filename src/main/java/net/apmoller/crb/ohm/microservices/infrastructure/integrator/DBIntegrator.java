@@ -1,6 +1,7 @@
 package net.apmoller.crb.ohm.microservices.infrastructure.integrator;
 
 import net.apmoller.crb.ohm.microservices.application.model.OrderDto;
+import net.apmoller.crb.ohm.microservices.application.model.OrderRequest;
 import net.apmoller.crb.ohm.microservices.common.abstraction.Integrator;
 import net.apmoller.crb.ohm.microservices.common.bean.Operations;
 import net.apmoller.crb.ohm.microservices.domain.model.OrderModel;
@@ -37,7 +38,7 @@ public class DBIntegrator implements Integrator {
     }
 
     @Override
-    public Mono<OrderDto> createCustomerDetails(OrderDto orderDto) {
-        return ops.connector(ProductConnector.class).createCustomerDetails(orderDto);
+    public Mono<OrderDto> createCustomerDetails(OrderRequest orderRequest) {
+        return ops.connector(ProductConnector.class).createCustomerDetails(orderRequest);
     }
 }

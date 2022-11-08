@@ -3,6 +3,7 @@ package net.apmoller.crb.ohm.microservices.application.service;
 import net.apmoller.crb.ohm.microservices.application.mapper.OrderMapper;
 import net.apmoller.crb.ohm.microservices.application.model.Order;
 import net.apmoller.crb.ohm.microservices.application.model.OrderDto;
+import net.apmoller.crb.ohm.microservices.application.model.OrderRequest;
 import net.apmoller.crb.ohm.microservices.application.validation.BookingOrderValidator;
 import net.apmoller.crb.ohm.microservices.domain.service.BookingDomainService;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class BookingService extends BaseService {
         return ops.service(BookingDomainService.class).getCustomerDetails(customerId);
     }
 
-    public Mono<OrderDto> createCustomerDetails(OrderDto orderDto) {
-        return ops.service(BookingDomainService.class).createCustomerDetails(orderDto);
+    public Mono<OrderDto> createCustomerDetails(OrderRequest orderRequest) {
+        return ops.service(BookingDomainService.class).createCustomerDetails(orderRequest);
     }
 }

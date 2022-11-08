@@ -2,6 +2,7 @@ package net.apmoller.crb.ohm.microservices.application.controller;
 
 import net.apmoller.crb.ohm.microservices.application.model.Order;
 import net.apmoller.crb.ohm.microservices.application.model.OrderDto;
+import net.apmoller.crb.ohm.microservices.application.model.OrderRequest;
 import net.apmoller.crb.ohm.microservices.application.service.BookingService;
 import net.apmoller.crb.ohm.microservices.common.bean.Operations;
 import net.apmoller.crb.ohm.microservices.infrastructure.contract.db.Product;
@@ -31,9 +32,9 @@ public class BookingController {
 	}
 
 	@PostMapping("/createCustomerDetails")
-	public Mono<OrderDto> createCustomerDetails(@RequestBody OrderDto orderDto)
+	public Mono<OrderDto> createCustomerDetails(@RequestBody OrderRequest orderRequest)
 	{
-		return ops.service(BookingService.class).createCustomerDetails(orderDto);
+		return ops.service(BookingService.class).createCustomerDetails(orderRequest);
 	}
 
 

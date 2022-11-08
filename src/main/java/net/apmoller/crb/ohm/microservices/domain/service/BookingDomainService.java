@@ -2,6 +2,7 @@ package net.apmoller.crb.ohm.microservices.domain.service;
 
 import lombok.extern.slf4j.Slf4j;
 import net.apmoller.crb.ohm.microservices.application.model.OrderDto;
+import net.apmoller.crb.ohm.microservices.application.model.OrderRequest;
 import net.apmoller.crb.ohm.microservices.common.bean.Operations;
 import net.apmoller.crb.ohm.microservices.domain.model.OrderModel;
 import net.apmoller.crb.ohm.microservices.infrastructure.integrator.DBIntegrator;
@@ -26,7 +27,7 @@ public class BookingDomainService extends BaseService {
         return ops.integrator(DBIntegrator.class).getCustomerDetails(customerId);
     }
 
-    public Mono<OrderDto> createCustomerDetails(OrderDto orderDto) {
-        return ops.integrator(DBIntegrator.class).createCustomerDetails(orderDto);
+    public Mono<OrderDto> createCustomerDetails(OrderRequest orderRequest) {
+        return ops.integrator(DBIntegrator.class).createCustomerDetails(orderRequest);
     }
 }
