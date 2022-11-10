@@ -1,5 +1,5 @@
 {
-  "order":{
+  "bookingOrder":{
     "customerType": "internal",
     "createdDate": "2019-04-28T14:45:15",
     "lastUpdatedTime": "2019-04-28T14:45:15",
@@ -7,7 +7,7 @@
     "source": "nepal",
     "destination": "bangladesh"
   },
-  "productList": [
+  "bookingProductList": [
     {
       "prod_name": "pencil",
       "prod_price": 1000
